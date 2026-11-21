@@ -1,18 +1,19 @@
-import { ImagePlus } from "lucide-react";
+import { Code2 } from "lucide-react";
 
 type ImagePlaceholderProps = {
   label: string;
+  title: string;
   className?: string;
 };
 
-export function ImagePlaceholder({ label, className = "" }: ImagePlaceholderProps) {
+export function ImagePlaceholder({ label, title, className = "" }: ImagePlaceholderProps) {
   return (
-    <div className={`image-placeholder ${className}`} role="img" aria-label={`${label} placeholder — add your photo`}>
+    <div className={`image-placeholder ${className}`} role="img" aria-label={label}>
       <div className="placeholder-mark" aria-hidden="true">
-        <ImagePlus size={22} strokeWidth={1.6} />
+        <Code2 size={22} strokeWidth={1.6} />
       </div>
       <div>
-        <strong>Add Your Photo</strong>
+        <strong>{title}</strong>
         <span>{label}</span>
       </div>
     </div>

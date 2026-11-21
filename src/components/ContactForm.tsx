@@ -1,8 +1,11 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CheckCircle2, Send } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+
+import { profile } from "@/data/portfolio";
+
 import { Button } from "./Button";
 
 const schema = z.object({
@@ -11,27 +14,89 @@ const schema = z.object({
   subject: z.string().trim().min(3, "Please add a subject.").max(120),
   message: z.string().trim().min(10, "Please write at least 10 characters.").max(1200),
 });
+
 type FormValues = z.infer<typeof schema>;
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver: zodResolver(schema) });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({ resolver: zodResolver(schema) });
+
   const submit = (data: FormValues) => {
     const body = encodeURIComponent(`${data.message}\n\nFrom: ${data.name} (${data.email})`);
-    window.location.href = `mailto:?subject=${encodeURIComponent(data.subject)}&body=${body}`;
+    const subject = encodeURIComponent(data.subject);
+    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
     setSent(true);
   };
+
   return (
     <form onSubmit={handleSubmit(submit)} noValidate className="contact-form">
       <div className="form-grid">
-        <label>Name<input {...register("name")} placeholder="Your name" aria-invalid={!!errors.name} /><small>{errors.name?.message}</small></label>
-        <label>Email<input {...register("email")} type="email" placeholder="you@example.com" aria-invalid={!!errors.email} /><small>{errors.email?.message}</small></label>
+        <label htmlFor="contact-name">
+          Name
+          <input
+            id="contact-name"
+            {...register("name")}
+            placeholder="Your name"
+            autoComplete="name"
+            aria-invalid={!!errors.name}
+            aria-describedby="contact-name-error"
+          />
+          <small id="contact-name-error">{errors.name?.message}</small>
+        </label>
+
+        <label htmlFor="contact-email">
+          Email
+          <input
+            id="contact-email"
+            {...register("email")}
+            type="email"
+            placeholder="you@example.com"
+            autoComplete="email"
+            aria-invalid={!!errors.email}
+            aria-describedby="contact-email-error"
+          />
+          <small id="contact-email-error">{errors.email?.message}</small>
+        </label>
       </div>
-      <label>Subject<input {...register("subject")} placeholder="Internship, collaboration, or opportunity" aria-invalid={!!errors.subject} /><small>{errors.subject?.message}</small></label>
-      <label>Message<textarea {...register("message")} rows={5} placeholder="Tell me about the opportunity or project..." aria-invalid={!!errors.message} /><small>{errors.message?.message}</small></label>
+
+      <label htmlFor="contact-subject">
+        Subject
+        <input
+          id="contact-subject"
+          {...register("subject")}
+          placeholder="Internship, collaboration, or opportunity"
+          aria-invalid={!!errors.subject}
+          aria-describedby="contact-subject-error"
+        />
+        <small id="contact-subject-error">{errors.subject?.message}</small>
+      </label>
+
+      <label htmlFor="contact-message">
+        Message
+        <textarea
+          id="contact-message"
+          {...register("message")}
+          rows={5}
+          placeholder="Tell me about the opportunity or project..."
+          aria-invalid={!!errors.message}
+          aria-describedby="contact-message-error"
+        />
+        <small id="contact-message-error">{errors.message?.message}</small>
+      </label>
+
       <div className="form-actions">
-        <Button type="submit">Let’s Work Together <ArrowUpRight size={16} /></Button>
-        {sent && <span className="form-success"><CheckCircle2 size={15} /> Your email app is ready.</span>}
+        <Button type="submit">
+          <Send size={16} aria-hidden="true" /> Send email
+        </Button>
+        {sent && (
+          <span className="form-success" role="status" aria-live="polite">
+            <CheckCircle2 size={15} aria-hidden="true" /> Your email app is ready.
+          </span>
+        )}
       </div>
     </form>
   );
