@@ -1,5 +1,5 @@
 {
-  "name": "tanstack_start_ts",
+  "name": "gloria-developer-portfolio",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -9,7 +9,12 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "format:check": "prettier --check \"src/components/*.tsx\" \"src/data/*.ts\" \"src/routes/*.tsx\" \"src/styles.css\" \"scripts/**/*.mjs\" \"*.{md,json}\"",
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/portfolio-checks.mjs",
+    "qa:browser": "node scripts/browser-qa.mjs",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test"
   },
   "overrides": {
     "rolldown": "1.2.1"
