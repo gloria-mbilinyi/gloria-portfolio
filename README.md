@@ -29,16 +29,16 @@ The project preserves Gloria's original photographs and portfolio information wh
 
 ## Technology Stack
 
-| Area | Technologies |
-| --- | --- |
-| Framework | React 19, TanStack Start, TanStack Router |
-| Language | TypeScript |
-| Styling | Tailwind CSS 4, custom CSS design tokens |
-| Animation | Motion for React |
-| Forms | React Hook Form, Zod |
-| Icons | Lucide React |
-| Build tooling | Vite 8, Nitro |
-| Quality | ESLint, Prettier, TypeScript |
+| Area          | Technologies                              |
+| ------------- | ----------------------------------------- |
+| Framework     | React 19, TanStack Start, TanStack Router |
+| Language      | TypeScript                                |
+| Styling       | Tailwind CSS 4, custom CSS design tokens  |
+| Animation     | Motion for React                          |
+| Forms         | React Hook Form, Zod                      |
+| Icons         | Lucide React                              |
+| Build tooling | Vite 8, Nitro                             |
+| Quality       | ESLint, Prettier, TypeScript              |
 
 ## Project Architecture
 
@@ -88,6 +88,8 @@ npm run dev         # Start the development server
 npm run typecheck   # Check TypeScript without emitting files
 npm run lint        # Run ESLint and formatting checks
 npm run test        # Run portfolio functionality checks
+npm run check       # Run the complete source-quality suite
+npm run qa:browser  # Test the running site at http://127.0.0.1:4180
 npm run build       # Create a production build
 npm run preview     # Preview the production build locally
 npm run format      # Format supported project files
@@ -109,7 +111,7 @@ The layout is mobile-first and adapts across compact phones, tablets, laptops, a
 
 ## Testing and Quality Assurance
 
-Before release, the following checks are expected to pass:
+Before release, run the source checks and production build:
 
 ```bash
 npm run typecheck
@@ -117,6 +119,15 @@ npm run lint
 npm run test
 npm run build
 ```
+
+For repeatable browser QA, start the development server on the test port in one terminal and run the browser suite in another:
+
+```bash
+npm run dev -- --host 127.0.0.1 --port 4180 --strictPort
+npm run qa:browser
+```
+
+The browser suite launches isolated headless Chrome sessions at 1440 x 1000 and 390 x 844. It verifies viewport overflow, theme switching, mobile navigation, project filtering, the TenderGuard detail dialog, CV availability, contact links, metadata, and browser-console errors.
 
 Manual QA covers:
 
@@ -131,11 +142,26 @@ Manual QA covers:
 
 ## Screenshots
 
-Verified desktop and mobile screenshots will be added after the final local QA pass.
+### Desktop
+
+![Desktop portfolio in dark mode](docs/screenshots/portfolio-desktop.png)
+
+### Mobile navigation
+
+![Mobile portfolio navigation in dark mode](docs/screenshots/portfolio-mobile.png)
 
 ## Live Demo
 
-Deployment is being prepared. A live URL will be added here only after the production deployment has been verified.
+No production URL is claimed until a deployment has been authenticated and verified. The current Nitro build is configured for Cloudflare and generates the required Wrangler metadata.
+
+```bash
+npm install
+npx wrangler login
+npm run build
+npx nitro deploy --prebuilt
+```
+
+After deployment, open the URL returned by Wrangler, verify the homepage and CV download, then add the confirmed URL to this section.
 
 ## GitHub Repository
 
