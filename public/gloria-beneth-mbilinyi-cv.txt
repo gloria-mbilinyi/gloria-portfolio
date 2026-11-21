@@ -12,7 +12,7 @@ EDUCATION
 Completed 2016 — Primary Education, Mwembetogwa B Primary School
 
 SELECTED PROJECTS
-Smart Clinic Management System · DIT Smart Assistant · Wild Animal Detection System · LiftSystem · Smart Water Tank Monitoring · Wireless Sensor Network · Gee Player · SafariSmart TZ · Tourism Chatbot · Animal Detector
+TenderGuard Africa · Smart Clinic Management System · DIT Smart Assistant · Wild Animal Detection System · LiftSystem · Smart Water Tank Monitoring · Wireless Sensor Network · Gee Player · SafariSmart TZ · Tourism Chatbot · Animal Detector
 
 TECHNICAL SKILLS
 Java, Python, JavaScript, Dart, SQL, C/C++, Spring Boot, React, Flutter, TensorFlow, RAG, PostgreSQL, Arduino, ESP32, Computer Networking, Git
