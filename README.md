@@ -4,6 +4,8 @@ A responsive developer portfolio for **Gloria Beneth Mbilinyi**, a Computer Engi
 
 This portfolio was upgraded for **Datheon Full Stack Web Development Internship - Task 1: Personal Developer Portfolio & Project Showcase**. It presents Gloria's verified technical work, education, skills, contact information, and downloadable CV in an accessible single-page experience.
 
+**Live portfolio:** [gloria-mbilinyi-gloria-portfolio.gloria-portfolio-tz.workers.dev](https://gloria-mbilinyi-gloria-portfolio.gloria-portfolio-tz.workers.dev)
+
 ## Project Overview
 
 The site is designed for internship reviewers, recruiters, collaborators, and other developers. It combines a concise personal introduction with project filtering, detailed project summaries, responsive navigation, theme controls, and clear contact actions.
@@ -165,18 +167,13 @@ These genuine browser-QA captures are generated from the local portfolio at the 
 | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | ![AI and machine-learning project cards in dark mode](docs/screenshots/portfolio-desktop.png) | ![Responsive mobile navigation in dark mode](docs/screenshots/portfolio-mobile.png) |
 
-## Deployment Status
+## Live Demo
 
-This repository does not currently document a verified public deployment URL. The Nitro production build targets Cloudflare and generates the required Wrangler metadata.
+The portfolio is publicly available on Cloudflare Workers:
 
-```bash
-npm install
-npx wrangler login
-npm run build
-npx nitro deploy --prebuilt
-```
+[View the live Gloria Developer Portfolio](https://gloria-mbilinyi-gloria-portfolio.gloria-portfolio-tz.workers.dev)
 
-After deployment, open the URL returned by Wrangler, verify the homepage and CV download, then add the confirmed URL to this section.
+The production deployment has been verified at desktop and mobile viewports, including the homepage, all nine project images, responsive navigation, and downloadable CV.
 
 ## GitHub Repository
 
@@ -213,7 +210,7 @@ Computer Engineering Student | Full-Stack Developer | AI & Machine Learning Enth
 - Filterable project showcase with accessible detail dialogs and genuine project screenshots
 - SEO and social metadata, semantic navigation, keyboard support, and theme persistence
 - Automated TypeScript, ESLint, formatting, content, browser, production-build, and GitHub Actions checks
-- Project-specific documentation with local setup, architecture, testing, screenshots, repository links, and deployment instructions
+- Project-specific documentation with local setup, architecture, testing, screenshots, repository links, and a verified Cloudflare Workers live demo
 
 ## License
 
