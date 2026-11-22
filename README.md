@@ -127,7 +127,7 @@ npm run dev -- --host 127.0.0.1 --port 4180 --strictPort
 npm run qa:browser
 ```
 
-The browser suite launches isolated headless Chrome sessions at 1440 x 1000 and 390 x 844. It verifies viewport overflow, theme switching, mobile navigation, project filtering, the TenderGuard detail dialog, CV availability, contact links, metadata, and browser-console errors.
+The browser suite launches isolated headless Chrome sessions at 1440 x 1000 and 390 x 844. It verifies viewport overflow, theme switching, mobile navigation, project filtering, the SafariSmart detail dialog and screenshot, CV availability, contact links, metadata, and browser-console errors.
 
 Manual QA covers:
 
@@ -144,7 +144,7 @@ Manual QA covers:
 
 ### Desktop
 
-![Desktop portfolio in dark mode](docs/screenshots/portfolio-desktop.png)
+![Desktop AI and machine-learning project cards in dark mode](docs/screenshots/portfolio-desktop.png)
 
 ### Mobile navigation
 

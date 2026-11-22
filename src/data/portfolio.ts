@@ -1,7 +1,12 @@
 import codingPhoto from "@/assets/images/profile/coding.jpg";
 import profilePhoto from "@/assets/images/profile/profile.jpg";
+import animalDetectorImg from "@/assets/images/projects/animal-detector.png";
 import ditSmartImg from "@/assets/images/projects/dit-smart-assistant.png";
+import geePlayerImg from "@/assets/images/projects/gee-player.png";
 import liftSystemImg from "@/assets/images/projects/lift-system.jpg";
+import safariSmartImg from "@/assets/images/projects/safarismart-ai-concierge.png";
+import smartClinicImg from "@/assets/images/projects/smart-clinic.png";
+import tenderGuardImg from "@/assets/images/projects/tenderguard-africa.png";
 import waterTankImg from "@/assets/images/projects/water-tank-iot.jpg";
 import wildlifeSafariImg from "@/assets/images/projects/wildlife-safari-assistant.jpg";
 import pcbPhoto from "@/assets/images/training/pcb-creation.jpg";
@@ -99,6 +104,7 @@ export const projects: PortfolioProject[] = [
     technologies: ["Python", "LangGraph", "MCP", "Qwen3", "Ollama", "Pydantic"],
     github: "https://github.com/gloria-mbilinyi/TenderGuard-Africa",
     imageLabel: "Agentic AI procurement workflow",
+    image: tenderGuardImg,
     featured: true,
   },
   {
@@ -110,6 +116,7 @@ export const projects: PortfolioProject[] = [
     github: "https://github.com/gloria-mbilinyi/smart-clinic",
     secondaryGithub: "https://github.com/gloria-mbilinyi/smart-clinic-frontend",
     imageLabel: "Full-stack clinic platform",
+    image: smartClinicImg,
     featured: true,
   },
   {
@@ -155,12 +162,21 @@ export const projects: PortfolioProject[] = [
     image: waterTankImg,
   },
   {
-    title: "Wireless Sensor Network",
-    category: "IoT",
+    title: "SafariSmart AI Concierge",
+    category: "AI/ML",
     description:
-      "A wireless sensor network prototype using Arduino sensor nodes and ESP-01 communication for environmental monitoring and gateway connectivity.",
-    technologies: ["Arduino", "ESP-01", "DHT11", "Wireless Communication"],
-    imageLabel: "Wireless sensor network architecture",
+      "An AI-powered tourism platform designed to help travelers explore destinations in Tanzania, plan personalized trips based on their preferences and budgets, and interact with an intelligent travel assistant.",
+    technologies: [
+      "AI Travel Assistant",
+      "Personalized Trip Planning",
+      "Destination Discovery",
+      "Budget-Based Planning",
+      "English/Kiswahili",
+      "Booking Requests",
+      "Operator Portal",
+    ],
+    imageLabel: "SafariSmart AI Concierge travel planning interface",
+    image: safariSmartImg,
   },
   {
     title: "Gee Player",
@@ -170,6 +186,7 @@ export const projects: PortfolioProject[] = [
     technologies: ["Flutter", "Dart", "media_kit", "Dio", "SQLite"],
     github: "https://github.com/gloria-mbilinyi/GeePlayer",
     imageLabel: "Flutter media player interface",
+    image: geePlayerImg,
   },
   {
     title: "Animal Detector",
@@ -179,6 +196,7 @@ export const projects: PortfolioProject[] = [
     technologies: ["Python", "TensorFlow", "CNN", "Streamlit"],
     github: "https://github.com/gloria-mbilinyi/animal_detector",
     imageLabel: "Animal Detector interface",
+    image: animalDetectorImg,
   },
 ];
 

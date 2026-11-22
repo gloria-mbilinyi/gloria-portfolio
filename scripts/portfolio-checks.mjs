@@ -18,6 +18,8 @@ assert.match(data, /https:\/\/github\.com\/gloria-mbilinyi/);
 assert.match(data, /https:\/\/www\.linkedin\.com\/in\/gloria-mbilinyi\//);
 assert.match(data, /gloriambilinyi5@gmail\.com/);
 assert.match(data, /TenderGuard Africa/);
+assert.match(data, /SafariSmart AI Concierge/);
+assert.equal(data.includes("Wireless Sensor Network"), false);
 assert.match(data, /\/gloria-beneth-mbilinyi-cv\.pdf/);
 assert.match(portfolio, /id="main-content"/);
 assert.match(contact, /mailto:\$\{profile\.email\}/);

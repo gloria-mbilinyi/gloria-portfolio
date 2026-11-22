@@ -102,9 +102,10 @@ async function runScenario({ name, width, height, mobile }) {
     ],
     { stdio: ["ignore", "ignore", "pipe"], windowsHide: true },
   );
+  let cdp;
 
   try {
-    const cdp = await connectToChrome(child);
+    cdp = await connectToChrome(child);
     const { targetInfos } = await cdp.send("Target.getTargets");
     const pageTarget = targetInfos.find((target) => target.type === "page");
     assert.ok(pageTarget, "Chrome page target was not available");
@@ -167,6 +168,7 @@ async function runScenario({ name, width, height, mobile }) {
       linkedinHref: document.querySelector('a[href*="linkedin.com"]')?.getAttribute("href"),
       githubHref: document.querySelector('a[href*="github.com"]')?.getAttribute("href"),
       menuVisible: getComputedStyle(document.querySelector(".mobile-menu-button")).display !== "none",
+      dark: document.documentElement.classList.contains("dark"),
       smoothScroll: getComputedStyle(document.documentElement).scrollBehavior,
       navItems: document.querySelectorAll(".desktop-nav a").length,
     }))()`);
@@ -195,8 +197,8 @@ async function runScenario({ name, width, height, mobile }) {
       dark: document.documentElement.classList.contains("dark"),
       stored: localStorage.getItem("portfolio-theme"),
     }))()`);
-    assert.equal(theme.dark, true);
-    assert.equal(theme.stored, "dark");
+    assert.notEqual(theme.dark, initial.dark);
+    assert.equal(theme.stored, theme.dark ? "dark" : "light");
 
     if (mobile) {
       assert.equal(initial.menuVisible, true);
@@ -223,21 +225,35 @@ async function runScenario({ name, width, height, mobile }) {
       await delay(350);
       const projectState = await evaluate(`(() => {
         const cards = [...document.querySelectorAll(".project-card")];
-        const tenderGuard = cards.find((card) => card.querySelector("h3")?.textContent === "TenderGuard Africa");
-        tenderGuard.querySelector("button").click();
-        return { count: cards.length, hasTenderGuard: Boolean(tenderGuard) };
+        const safariSmart = cards.find((card) => card.querySelector("h3")?.textContent === "SafariSmart AI Concierge");
+        safariSmart?.querySelector("button")?.click();
+        return {
+          count: cards.length,
+          hasSafariSmart: Boolean(safariSmart),
+          hasImage: safariSmart?.querySelector("img")?.alt.includes("SafariSmart AI Concierge"),
+        };
       })()`);
-      assert.equal(projectState.count, 4);
-      assert.equal(projectState.hasTenderGuard, true);
+      assert.equal(projectState.count, 5);
+      assert.equal(projectState.hasSafariSmart, true);
+      assert.equal(projectState.hasImage, true);
       await delay(250);
       const dialog = await evaluate(`(() => ({
         open: Boolean(document.querySelector('[role="dialog"]')),
         title: document.querySelector('[role="dialog"] h3')?.textContent,
+        featureCount: document.querySelectorAll('[role="dialog"] .dialog-tech span').length,
       }))()`);
       assert.equal(dialog.open, true);
-      assert.equal(dialog.title, "TenderGuard Africa");
+      assert.equal(dialog.title, "SafariSmart AI Concierge");
+      assert.equal(dialog.featureCount, 7);
       await evaluate("document.querySelector('[aria-label=\"Close project details\"]').click()");
       await delay(300);
+      await evaluate(`(() => {
+        document.documentElement.style.scrollBehavior = "auto";
+        [...document.querySelectorAll(".project-card")]
+          .find((card) => card.querySelector("h3")?.textContent === "SafariSmart AI Concierge")
+          ?.scrollIntoView({ block: "center" });
+      })()`);
+      await delay(700);
     }
 
     const screenshot = await send("Page.captureScreenshot", {
@@ -248,12 +264,28 @@ async function runScenario({ name, width, height, mobile }) {
     writeFileSync(join(screenshotDirectory, `portfolio-${name}.png`), screenshot.data, "base64");
 
     assert.deepEqual(browserErrors, [], `${name}: browser console errors were reported`);
-    cdp.close();
     return { name, ...initial, cvStatus: cvResponse.status, browserErrors };
   } finally {
-    child.kill();
-    await delay(100);
-    rmSync(profileDirectory, { recursive: true, force: true });
+    try {
+      await cdp?.send("Browser.close");
+    } catch {
+      child.kill();
+    }
+    cdp?.close();
+    if (child.exitCode === null) {
+      await Promise.race([
+        new Promise((resolveExit) => child.once("exit", resolveExit)),
+        delay(2000),
+      ]);
+    }
+    if (child.exitCode === null) child.kill();
+    await delay(300);
+    rmSync(profileDirectory, {
+      recursive: true,
+      force: true,
+      maxRetries: 10,
+      retryDelay: 200,
+    });
   }
 }
 
