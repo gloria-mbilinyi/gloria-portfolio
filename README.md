@@ -44,12 +44,15 @@ The project preserves Gloria's original photographs and portfolio information wh
 
 ```text
 gloria-portfolio-src/
+|-- .github/workflows/      # Continuous integration checks
+|-- docs/screenshots/       # Verified desktop and mobile QA captures
 |-- public/                  # Public files, CV, robots.txt, favicon
+|-- scripts/                 # CV generation and automated QA scripts
 |-- src/
 |   |-- assets/images/      # Profile, training, and project images
 |   |-- components/         # Portfolio sections and reusable UI
 |   |-- data/portfolio.ts   # Portfolio content and project records
-|   |-- lib/                # Shared utilities and error handling
+|   |-- lib/                # Shared utilities
 |   |-- routes/             # TanStack file-based routes and metadata
 |   |-- router.tsx          # Router configuration
 |   |-- server.ts           # Server entry and SSR error handling
@@ -86,7 +89,8 @@ Open the local URL printed by Vite, normally `http://localhost:3000`.
 ```bash
 npm run dev         # Start the development server
 npm run typecheck   # Check TypeScript without emitting files
-npm run lint        # Run ESLint and formatting checks
+npm run lint        # Run ESLint
+npm run format:check # Verify formatting without changing files
 npm run test        # Run portfolio functionality checks
 npm run check       # Run the complete source-quality suite
 npm run qa:browser  # Test the running site at http://127.0.0.1:4180
@@ -97,13 +101,26 @@ npm run format      # Format supported project files
 
 ## Featured Projects
 
-- **TenderGuard Africa** - Agentic AI decision support for auditable public tender evaluation, built with Python, LangGraph, MCP, Qwen3, Ollama, and Pydantic.
-- **Smart Clinic Management System** - Full-stack healthcare management platform with role-based access, appointments, authentication, and medical records.
-- **DIT Smart Assistant** - Retrieval-Augmented Generation assistant for questions related to Dar es Salaam Institute of Technology.
-- **Wild Animal Detection and Classification System** - TensorFlow CNN application for classifying nine wild animal species.
-- **LiftSystem** - Accessible Arduino elevator prototype with sensing, controls, LCD feedback, and emergency features.
+The portfolio currently presents nine projects, in the same order as `src/data/portfolio.ts`:
 
-Additional software, mobile, IoT, embedded systems, and machine learning projects are available in the live portfolio and on GitHub.
+1. **TenderGuard Africa** (`AI/ML`) - Agentic AI procurement decision support for tender-compliance checks, bid-price comparison, supplier-data review, and auditable committee evidence.
+   - **Technologies:** Python, LangGraph, MCP, Qwen3, Ollama, Pydantic · [Repository](https://github.com/gloria-mbilinyi/TenderGuard-Africa)
+2. **Smart Clinic Management System** (`Software`) - Full-stack healthcare management for administrator, doctor, and patient roles, appointments, authentication, and medical records.
+   - **Technologies:** Java, Spring Boot, Spring Security, JWT, PostgreSQL, React, Vite · [Backend](https://github.com/gloria-mbilinyi/smart-clinic) · [Frontend](https://github.com/gloria-mbilinyi/smart-clinic-frontend)
+3. **DIT Smart Assistant** (`AI/ML`) - Retrieval-Augmented Generation assistant for questions related to Dar es Salaam Institute of Technology.
+   - **Technologies:** Python, RAG, ChromaDB, embeddings, Streamlit · [Repository](https://github.com/gloria-mbilinyi/dit-smart-assistant)
+4. **Wild Animal Detection and Classification System** (`AI/ML`) - Machine-learning image classifier for nine wild animal species.
+   - **Technologies:** Python, TensorFlow, CNN, machine learning · [Repository](https://github.com/gloria-mbilinyi/Wildlife-Safari-Assistant)
+5. **LiftSystem - Accessible Elevator Control** (`Embedded Systems`) - Arduino elevator prototype with floor controls, LCD feedback, sensing, emergency controls, buzzer, and audio notifications.
+   - **Technologies:** Arduino, Embedded C/C++, servo, ultrasonic sensor, LCD · [Repository](https://github.com/gloria-mbilinyi/liftSystem)
+6. **Smart Water Tank Level Monitoring** (`IoT`) - Water-level and environmental monitoring with ultrasonic, water-level, and temperature sensors.
+   - **Technologies:** Arduino, HC-SR04, DHT11, LCD, sensors · Repository not publicly listed
+7. **SafariSmart AI Concierge** (`AI/ML`) - AI-powered tourism platform for exploring Tanzanian destinations, planning personalized budget-aware trips, and interacting with a bilingual travel assistant.
+   - **Capabilities:** AI travel assistant, personalized trip planning, destination discovery, budget-based planning, English/Kiswahili support, booking requests, operator portal · [Repository](https://github.com/gloria-mbilinyi/safarismart-ai-concierge)
+8. **Gee Player** (`Mobile`) - Flutter media player for video and music playback with English and Kiswahili subtitle support.
+   - **Technologies:** Flutter, Dart, media_kit, Dio, SQLite · [Repository](https://github.com/gloria-mbilinyi/GeePlayer)
+9. **Animal Detector** (`AI/ML`) - TensorFlow image-classification application packaged through Streamlit.
+   - **Technologies:** Python, TensorFlow, CNN, Streamlit · [Repository](https://github.com/gloria-mbilinyi/animal_detector)
 
 ## Responsive Design
 
@@ -142,17 +159,15 @@ Manual QA covers:
 
 ## Screenshots
 
-### Desktop
+These genuine browser-QA captures are generated from the local portfolio at the tested desktop and mobile viewports.
 
-![Desktop AI and machine-learning project cards in dark mode](docs/screenshots/portfolio-desktop.png)
+| Desktop project showcase                                                                      | Mobile navigation                                                                   |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| ![AI and machine-learning project cards in dark mode](docs/screenshots/portfolio-desktop.png) | ![Responsive mobile navigation in dark mode](docs/screenshots/portfolio-mobile.png) |
 
-### Mobile navigation
+## Deployment Status
 
-![Mobile portfolio navigation in dark mode](docs/screenshots/portfolio-mobile.png)
-
-## Live Demo
-
-No production URL is claimed until a deployment has been authenticated and verified. The current Nitro build is configured for Cloudflare and generates the required Wrangler metadata.
+This repository does not currently document a verified public deployment URL. The Nitro production build targets Cloudflare and generates the required Wrangler metadata.
 
 ```bash
 npm install
@@ -177,11 +192,28 @@ Computer Engineering Student | Full-Stack Developer | AI & Machine Learning Enth
 - LinkedIn: [linkedin.com/in/gloria-mbilinyi](https://www.linkedin.com/in/gloria-mbilinyi/)
 - Email: [gloriambilinyi5@gmail.com](mailto:gloriambilinyi5@gmail.com)
 
-## Internship Assignment Information
+## Datheon Internship Assignment
 
 - **Program:** Datheon Full Stack Web Development Internship
 - **Assignment:** Task 1 - Personal Developer Portfolio & Project Showcase
-- **Objective:** Deliver a professional, responsive portfolio that presents personal information, technical skills, featured projects, repository links, a downloadable CV, and working contact details.
+- **Objective:** Deliver a professional, responsive portfolio that clearly presents the developer, technical skills, projects, source repositories, CV, and contact information.
+
+### Task 1 requirements addressed
+
+- Professional hero and About sections
+- Technical-skills presentation
+- Nine current project cards with descriptions and verified repository links where available
+- Downloadable CV and working GitHub, LinkedIn, and email links
+- Responsive desktop, tablet, and mobile layouts with hamburger navigation
+- Persistent dark/light theme, smooth scrolling, accessible controls, and reduced-motion support
+
+### Completed deliverables
+
+- Responsive React and TypeScript portfolio preserving the original personal content and photographs
+- Filterable project showcase with accessible detail dialogs and genuine project screenshots
+- SEO and social metadata, semantic navigation, keyboard support, and theme persistence
+- Automated TypeScript, ESLint, formatting, content, browser, production-build, and GitHub Actions checks
+- Project-specific documentation with local setup, architecture, testing, screenshots, repository links, and deployment instructions
 
 ## License
 
